@@ -381,13 +381,13 @@ def main():
         model = parser_args.set_model_by_ram(args.ram, args.language)
     else:
         model = parser_args.set_model_by_ram(args.ram, args.language)
-    print(f"Loading model {model}...")
+    print(f"Loading model {model}...\n")
 
     # remove .en from model if target_language is not set to English
     if not args.makecaptions:
         if args.target_language != "en" or args.target_language != "English":
             model = model.replace(".en", "")
-            print(f"Loading model {model} instead since target language is not English...")
+            #print(f"Loading model {model} instead since target language is not English...")
         audio_model = whisper.load_model(model, device=device, download_root=f"{args.model_dir}")
 
     if args.microphone_enabled:
@@ -552,10 +552,7 @@ def main():
 
                 audio = whisper.load_audio(temp_file)
                 audio = whisper.pad_or_trim(audio)
-                # if ram is set to 12 use n_mels=128 else use n_mels=80
-                if args.ram == "12gb-v2":
-                    mel = whisper.log_mel_spectrogram(audio, n_mels=80).to(device)
-                elif args.ram == "12gb-v3":
+                if args.ram == "12gb-v3":
                     mel = whisper.log_mel_spectrogram(audio, n_mels=128).to(device)
                 else:
                     mel = whisper.log_mel_spectrogram(audio, n_mels=80).to(device)
@@ -567,7 +564,8 @@ def main():
                         print(f"Language Set: {args.stream_language}\n")
                         detected_language = args.stream_language
                     else:
-                        print(f"Detecting Language\n")
+                        if args.no_log == False:
+                            print(f"Detecting Language\n")
                         _, language_probs = audio_model.detect_language(mel)
                         detected_language = max(language_probs, key=language_probs.get)
 
@@ -744,93 +742,73 @@ def main():
 
                 #os.system('cls' if os.name=='nt' else 'clear')
 
-                if not args.no_log:
-                    # Only print the last element of the transcription (the new segment)
-                    original_text, translated_text, transcribed_text, detected_language = transcription[-1]
+                # Always fetch the latest transcription
+                original_text, translated_text, transcribed_text, detected_language = transcription[-1]
 
-                    # Filter text based on blacklist using regex
-                    filtered_text = original_text.lower()
-                    for phrase in blacklist:
-                        filtered_text = re.sub(rf"\b{phrase.lower()}\b", "", filtered_text).strip()
+                # Filter text based on blacklist using regex
+                filtered_text = original_text.lower()
+                for phrase in blacklist:
+                    filtered_text = re.sub(rf"\b{phrase.lower()}\b", "", filtered_text).strip()
 
-                    if not filtered_text:  # Check if filtered_text is empty
-                        continue
+                if filtered_text:  # Only continue if there’s text left after filtering
+                    # If logging is enabled
+                    if not args.no_log:
+                        print("=" * shutil.get_terminal_size().columns)
+                        print(
+                            f"{' ' * int((shutil.get_terminal_size().columns - 15) / 2)} What was Heard -> {detected_language} {' ' * int((shutil.get_terminal_size().columns - 15) / 2)}")
+                        print(f"{filtered_text}")  # Display filtered text
+                        new_header = filtered_text
 
-                    print("=" * shutil.get_terminal_size().columns)
-                    print(
-                        f"{' ' * int((shutil.get_terminal_size().columns - 15) / 2)} What was Heard -> {detected_language} {' ' * int((shutil.get_terminal_size().columns - 15) / 2)}")
-                    print(f"{filtered_text}")  # Use filtered_text here
+                        if args.translate and translated_text:
+                            # Filter and print translated text
+                            filtered_translated_text = translated_text
+                            for phrase in blacklist:
+                                filtered_translated_text = re.sub(rf"\b{phrase.lower()}\b", "",
+                                                                  filtered_translated_text).strip()
+
+                            print(
+                                f"{'-' * int((shutil.get_terminal_size().columns - 15) / 2)} EN Translation {'-' * int((shutil.get_terminal_size().columns - 15) / 2)}")
+                            print(f"{filtered_translated_text}\n")
+
+                        if args.transcribe and transcribed_text:
+                            # Filter and print transcribed text
+                            filtered_transcribed_text = transcribed_text
+                            for phrase in blacklist:
+                                filtered_transcribed_text = re.sub(rf"\b{phrase.lower()}\b", "",
+                                                                   filtered_transcribed_text).strip()
+
+                            print(
+                                f"{'-' * int((shutil.get_terminal_size().columns - 15) / 2)} {detected_language} -> {target_language} {'-' * int((shutil.get_terminal_size().columns - 15) / 2)}")
+                            print(f"{filtered_transcribed_text}\n")
+
+                    # Update header regardless of no_log
                     new_header = filtered_text
                     if args.portnumber:
                         api_backend.update_header(new_header)
 
-                    if args.translate and translated_text:
-                        # Filter translated_text as well
-                        filtered_translated_text = translated_text
-                        for phrase in blacklist:
-                            filtered_translated_text = re.sub(rf"\b{phrase.lower()}\b", "",
-                                                              filtered_translated_text).strip()
+                    # Simple one-line format for no_log
+                    if args.no_log:
+                        print(f"[Input ({detected_language})]: {filtered_text}\n")
 
-                        print(
-                            f"{'-' * int((shutil.get_terminal_size().columns - 15) / 2)} EN Translation {'-' * int((shutil.get_terminal_size().columns - 15) / 2)}")
-                        print(f"{filtered_translated_text}\n")  # Use filtered_translated_text here
+                        if args.transcribe and transcribed_text:
+                            filtered_transcribed_text = transcribed_text
+                            for phrase in blacklist:
+                                filtered_transcribed_text = re.sub(rf"\b{phrase.lower()}\b", "",
+                                                                   filtered_transcribed_text).strip()
+                            print(
+                                f"[Transcription ({detected_language} -> {target_language})]: {filtered_transcribed_text}\n")
 
-                    if args.transcribe and transcribed_text:
-                        # Filter transcribed_text as well
-                        filtered_transcribed_text = transcribed_text
-                        for phrase in blacklist:
-                            filtered_transcribed_text = re.sub(rf"\b{phrase.lower()}\b", "",
-                                                               filtered_transcribed_text).strip()
-
-                        print(
-                            f"{'-' * int((shutil.get_terminal_size().columns - 15) / 2)} {detected_language} -> {target_language} {'-' * int((shutil.get_terminal_size().columns - 15) / 2)}")
-                        print(f"{filtered_transcribed_text}\n")  # Use filtered_transcribed_text here
-
-                else:
-                    # Only print the last translated or transcribed text
-                    original_text, translated_text, transcribed_text, detected_language = transcription[-1]
-
-                    if args.translate and translated_text:
-                        # Filter translated_text using regex
-                        filtered_translated_text = translated_text
-                        for phrase in blacklist:
-                            filtered_translated_text = re.sub(rf"\b{phrase.lower()}\b", "",
-                                                              filtered_translated_text).strip()
-
-                        print(f"{filtered_translated_text}")  # Use filtered_translated_text here
-
-                    if args.transcribe and transcribed_text:
-                        # Filter transcribed_text using regex
-                        filtered_transcribed_text = transcribed_text
-                        for phrase in blacklist:
-                            filtered_transcribed_text = re.sub(rf"\b{phrase.lower()}\b", "",
-                                                               filtered_transcribed_text).strip()
-
-                        print(f"{filtered_transcribed_text}")  # Use filtered_transcribed_text here
-
+                        if args.translate and translated_text:
+                            filtered_translated_text = translated_text
+                            for phrase in blacklist:
+                                filtered_translated_text = re.sub(rf"\b{phrase.lower()}\b", "",
+                                                                  filtered_translated_text).strip()
+                            print(f"[Translation (EN)]: {filtered_translated_text}\n")
 
                 print('', end='', flush=True)
 
-                if args.auto_model_swap:
-                    if last_detected_language != detected_language:
-                        last_detected_language = detected_language
-                        language_counters[detected_language] = 1
-                    else:
-                        language_counters[detected_language] += 1
-
-                    if language_counters[detected_language] == 5:
-                        if detected_language == 'en' and model != 'base':
-                            print("Detected English 5 times in a row, changing model to base.")
-                            model = 'base'
-                            audio_model = whisper.load_model(model, device=device)
-                            print("Model was changed to base since English was detected 5 times in a row.")
-                        elif detected_language != 'en' and model != 'large':
-                            print(f"Detected {detected_language} 5 times in a row, changing model to large.")
-                            model = 'large'
-                            audio_model = whisper.load_model(model, device=device)
-                            print(f"Model was changed to large since {detected_language} was detected 5 times in a row.")
-        # sleep for 1 second
-            sleep(1)
+            # sleep for half second
+            sleep(0.5)
         
         except Exception as e:
             if not isinstance(e, KeyboardInterrupt):

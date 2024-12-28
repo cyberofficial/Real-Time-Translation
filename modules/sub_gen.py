@@ -9,7 +9,7 @@ args = parser_args.parse_arguments()
 def run_sub_gen(input_path: str, output_name: str = "", output_directory: str = "./"):
     model_type = parser_args.set_model_by_ram(args.ram, args.language)
     print("Loading Model")
-    model = whisper.load_model(model_type)
+    model = whisper.load_model(model_type, device=args.device, download_root=f"{args.model_dir}")
 
     print("Setting Path")
     print("Doing the work now...")

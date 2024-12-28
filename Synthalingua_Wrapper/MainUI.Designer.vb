@@ -207,7 +207,7 @@ Partial Class MainUI
         SaveConfigToFileButton.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         SaveConfigToFileButton.FlatStyle = FlatStyle.Popup
         SaveConfigToFileButton.Font = New Font("Segoe UI", 12F)
-        SaveConfigToFileButton.Location = New Point(513, 736)
+        SaveConfigToFileButton.Location = New Point(988, 585)
         SaveConfigToFileButton.Margin = New Padding(3, 2, 3, 2)
         SaveConfigToFileButton.Name = "SaveConfigToFileButton"
         SaveConfigToFileButton.Size = New Size(108, 32)
@@ -522,7 +522,7 @@ Partial Class MainUI
         ConfigTextBox.BackColor = Color.SlateBlue
         ConfigTextBox.BorderStyle = BorderStyle.FixedSingle
         ConfigTextBox.Font = New Font("Segoe UI", 13F)
-        ConfigTextBox.Location = New Point(153, 472)
+        ConfigTextBox.Location = New Point(626, 312)
         ConfigTextBox.Margin = New Padding(3, 2, 3, 2)
         ConfigTextBox.Multiline = True
         ConfigTextBox.Name = "ConfigTextBox"
@@ -539,7 +539,7 @@ Partial Class MainUI
         GenerateConfigButton.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         GenerateConfigButton.FlatStyle = FlatStyle.Popup
         GenerateConfigButton.Font = New Font("Segoe UI", 13F)
-        GenerateConfigButton.Location = New Point(153, 736)
+        GenerateConfigButton.Location = New Point(626, 585)
         GenerateConfigButton.Margin = New Padding(3, 2, 3, 2)
         GenerateConfigButton.Name = "GenerateConfigButton"
         GenerateConfigButton.Size = New Size(116, 32)
@@ -610,7 +610,7 @@ Partial Class MainUI
         SettingsTabs.Controls.Add(TabPage3)
         SettingsTabs.Controls.Add(TabPage4)
         SettingsTabs.HotTrack = True
-        SettingsTabs.Location = New Point(153, 176)
+        SettingsTabs.Location = New Point(627, 6)
         SettingsTabs.Margin = New Padding(3, 2, 3, 2)
         SettingsTabs.Name = "SettingsTabs"
         SettingsTabs.SelectedIndex = 0
@@ -989,7 +989,7 @@ Partial Class MainUI
         RunScript.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         RunScript.FlatStyle = FlatStyle.Popup
         RunScript.Font = New Font("Segoe UI", 15F)
-        RunScript.Location = New Point(274, 736)
+        RunScript.Location = New Point(748, 585)
         RunScript.Margin = New Padding(3, 2, 3, 2)
         RunScript.Name = "RunScript"
         RunScript.Size = New Size(234, 32)
@@ -1165,7 +1165,7 @@ Partial Class MainUI
         SaveConfig.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         SaveConfig.FlatStyle = FlatStyle.Popup
         SaveConfig.Font = New Font("Segoe UI", 12F)
-        SaveConfig.Location = New Point(7, 679)
+        SaveConfig.Location = New Point(625, 621)
         SaveConfig.Margin = New Padding(3, 2, 3, 2)
         SaveConfig.Name = "SaveConfig"
         SaveConfig.Size = New Size(140, 59)
@@ -1179,7 +1179,7 @@ Partial Class MainUI
         WipeSettings.FlatAppearance.MouseDownBackColor = Color.Indigo
         WipeSettings.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         WipeSettings.FlatStyle = FlatStyle.Popup
-        WipeSettings.Location = New Point(24, 742)
+        WipeSettings.Location = New Point(310, 727)
         WipeSettings.Name = "WipeSettings"
         WipeSettings.Size = New Size(123, 23)
         WipeSettings.TabIndex = 29
@@ -1191,7 +1191,7 @@ Partial Class MainUI
         ' 
         CheckBoxCMDBLock.AutoSize = True
         CheckBoxCMDBLock.CheckAlign = ContentAlignment.MiddleRight
-        CheckBoxCMDBLock.Location = New Point(153, 713)
+        CheckBoxCMDBLock.Location = New Point(626, 562)
         CheckBoxCMDBLock.Margin = New Padding(3, 2, 3, 2)
         CheckBoxCMDBLock.Name = "CheckBoxCMDBLock"
         CheckBoxCMDBLock.RightToLeft = RightToLeft.No
@@ -1207,7 +1207,7 @@ Partial Class MainUI
         ' EraseCheckBox
         ' 
         EraseCheckBox.AutoSize = True
-        EraseCheckBox.Location = New Point(7, 747)
+        EraseCheckBox.Location = New Point(288, 732)
         EraseCheckBox.Name = "EraseCheckBox"
         EraseCheckBox.Size = New Size(15, 14)
         EraseCheckBox.TabIndex = 30
@@ -1282,7 +1282,7 @@ Partial Class MainUI
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.DarkSlateBlue
-        ClientSize = New Size(626, 778)
+        ClientSize = New Size(1597, 950)
         Controls.Add(GitHubPicture)
         Controls.Add(PictureItch)
         Controls.Add(GroupBox6)

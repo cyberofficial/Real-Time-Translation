@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-16"?>
 <MyApplicationData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <MySubMain>true</MySubMain>
-  <MainForm>MainUI</MainForm>
+  <MainForm>UserMode</MainForm>
   <SingleInstance>false</SingleInstance>
-  <ShutdownMode>0</ShutdownMode>
+  <ShutdownMode>1</ShutdownMode>
   <EnableVisualStyles>true</EnableVisualStyles>
   <AuthenticationMode>0</AuthenticationMode>
   <SaveMySettingsOnExit>true</SaveMySettingsOnExit>
   <SplashScreen>Loading_Screen</SplashScreen>
-  <MinimumSplashScreenDisplayTime>3000</MinimumSplashScreenDisplayTime>
+  <MinimumSplashScreenDisplayTime>4000</MinimumSplashScreenDisplayTime>
 </MyApplicationData>

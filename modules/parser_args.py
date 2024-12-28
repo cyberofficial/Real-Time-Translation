@@ -80,7 +80,6 @@ def parse_arguments():
     parser.add_argument("--transcribe", action='store_true', help="transcribe the text into the desired language.")
     parser.add_argument("--language", help="Language to translate from.", type=str, choices=VALID_LANGUAGES)
     parser.add_argument("--target_language", help="Language to translate to.", type=str, choices=VALID_LANGUAGES)
-    parser.add_argument("--auto_model_swap", action='store_true', help="Automatically swap model based on detected language.")
     parser.add_argument("--device", default="cuda", help="Device to use for model. If not specified, will use CUDA if available. Available options: cpu, cuda")
     parser.add_argument("--cuda_device", default=0, help="CUDA device to use for model. If not specified, will use CUDA device 0.", type=int)
     parser.add_argument("--discord_webhook", default=None, help="Discord webhook to send transcription to.", type=str)
