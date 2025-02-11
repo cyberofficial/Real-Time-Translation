@@ -5,11 +5,39 @@ import glob
 
 block_cipher = None
 
-# Get the list of all DLLs in the CUDA bin directory
-cuda_dlls = glob.glob('C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.1\\bin\\*.dll')
+# Define CUDA paths
+CUDA_PATH = 'C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.6'
+cuda_bin = os.path.join(CUDA_PATH, 'bin')
+cupti_path = os.path.join(CUDA_PATH, 'extras', 'CUPTI', 'lib64')
 
-# Convert the list of DLL paths to a list of tuples for PyInstaller
-binaries = [(dll, '.') for dll in cuda_dlls]
+binaries = []
+
+# Only add DLLs from paths that exist
+if os.path.exists(cuda_bin):
+    cuda_dlls = glob.glob(os.path.join(cuda_bin, '*.dll'))
+    binaries.extend((dll, '.') for dll in cuda_dlls)
+
+if os.path.exists(cupti_path):
+    cupti_dlls = glob.glob(os.path.join(cupti_path, '*.dll'))
+    binaries.extend((dll, '.') for dll in cupti_dlls)
+
+# Explicitly add critical CUDA DLLs if they exist
+critical_dlls = [
+    os.path.join(cuda_bin, 'cudart64_12.dll'),
+    os.path.join(cuda_bin, 'cublas64_12.dll'),
+    os.path.join(cuda_bin, 'cublasLt64_12.dll'),
+    os.path.join(cuda_bin, 'cufft64_11.dll'),
+    os.path.join(cuda_bin, 'curand64_10.dll'),
+    os.path.join(cuda_bin, 'cusolver64_11.dll'),
+    os.path.join(cuda_bin, 'cusparse64_12.dll'),
+    os.path.join(cuda_bin, 'cudnn_ops_infer64_8.dll'),
+    os.path.join(cuda_bin, 'cudnn_cnn_infer64_8.dll'),
+    os.path.join(cupti_path, 'cupti64_2024.3.2.dll')
+]
+
+for dll in critical_dlls:
+    if os.path.exists(dll):
+        binaries.append((dll, '.'))
 
 a = Analysis(
     ['transcribe_audio.py'],
@@ -20,7 +48,7 @@ a = Analysis(
        ('data_whisper\\Lib\\site-packages\\whisper\\assets\\gpt2.tiktoken', 'whisper\\assets'),
        ('html_data\\static\\*', 'html_data\\static\\'),
        ('html_data\\*', 'html_data\\')],
-    hiddenimports=[],
+    hiddenimports=['torch', 'numpy', 'sounddevice', 'speech_recognition'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

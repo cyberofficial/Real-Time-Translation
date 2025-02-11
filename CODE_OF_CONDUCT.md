@@ -1,142 +1,214 @@
-# Contributor Covenant Code of Conduct
+# Synthalingua Code of Conduct
+
+## Table of Contents
+- [Our Pledge](#our-pledge)
+- [Expected Behavior](#expected-behavior)
+- [Unacceptable Behavior](#unacceptable-behavior)
+- [Reporting Guidelines](#reporting-guidelines)
+- [Enforcement Process](#enforcement-process)
+- [Scope](#scope)
+- [Conflict Resolution](#conflict-resolution)
+- [Confidentiality](#confidentiality)
+- [Enforcement Guidelines](#enforcement-guidelines)
+- [Attribution](#attribution)
 
 ## Our Pledge
 
-We, the members, contributors, and leaders of this community, commit to creating a harassment-free and inclusive experience for **everyone**. We value and celebrate diversity in all its forms, including but not limited to:
+We, the Synthalingua community members, contributors, and leaders, commit to making participation in our community a harassment-free and inclusive experience for everyone. We celebrate and value diversity in all its forms, including:
 
-* **Language, Age, Body Size, Visible or Invisible Disability, Ethnicity, Sex Characteristics, Gender Identity and Expression, Level of Experience, Education, Socio-economic Status, Nationality, Personal Appearance, Race, Religion, Sexual Identity, and Orientation.**
+* Age, body size, visible or invisible disability
+* Ethnicity, sex characteristics, gender identity and expression
+* Education, socio-economic status, nationality
+* Personal appearance, race, religion
+* Sexual identity and orientation
+* Technical experience and skill levels
 
-We pledge to go beyond simply avoiding harmful behavior; we actively cultivate a welcoming and respectful environment by:
+We pledge to foster a welcoming and respectful environment by:
 
-* **Treating each other with kindness, empathy, and respect.**
-* **Valuing diverse perspectives, experiences, and contributions.**
-* **Communicating thoughtfully and constructively.**
-* **Assuming good intentions and approaching disagreements with a willingness to understand.**
-* **Taking responsibility for our actions and working to learn and grow together.**
+* Treating each other with kindness, empathy, and respect
+* Valuing diverse perspectives and experiences
+* Communicating thoughtfully and constructively
+* Assuming good intentions in our interactions
+* Taking responsibility for our actions and learning from mistakes
 
-We believe that a diverse and inclusive community is a stronger community. This shared pledge guides our actions and interactions as we build this project together. 
+## Expected Behavior
 
-## Our Standards
+To create a positive environment, we encourage:
 
-We are committed to creating an inclusive and respectful environment.  We strive to:
+**Technical Collaboration:**
+* Providing constructive code reviews with specific, actionable feedback
+* Documenting decisions and sharing knowledge
+* Helping others learn and grow
+* Being open to different technical approaches and solutions
 
-**Positive Interactions:**
+**Communication:**
+* Using clear, professional language
+* Being patient with questions and explanations
+* Focusing on the technical merits of ideas
+* Acknowledging and learning from mistakes
+* Staying on-topic in discussions
 
-* **Treat everyone with respect and consideration**, valuing diverse perspectives, experiences, and backgrounds.
-* **Assume good intentions** and avoid making assumptions about others.
-* **Be empathetic and understanding** in our communication, recognizing that not everyone expresses themselves in the same way.
-* **Use welcoming and inclusive language**, avoiding jargon, slang, or terminology that might be unfamiliar or offensive.
-* **Give and receive constructive feedback gracefully**, focusing on the content rather than personal attacks.
+**Community Building:**
+* Welcoming newcomers and helping them get started
+* Sharing resources and knowledge
+* Supporting each other's growth
+* Celebrating achievements and contributions
 
-**Collaboration and Professionalism:**
+## Unacceptable Behavior
 
-* **Focus on what is best for the community as a whole**, even if it means setting aside personal preferences.
-* **Be mindful of the time and energy of others**, keeping discussions focused and avoiding unnecessary distractions.
-* **Take responsibility for our words and actions**, acknowledging mistakes and working to learn from them.
-* **Seek to understand different viewpoints**, even if we disagree, and engage in respectful dialogue.
+The following behaviors are considered violations of our Code of Conduct:
 
-**Unacceptable Behavior:**
+**Technical Conduct:**
+* Intentionally submitting malicious code
+* Deliberately introducing security vulnerabilities
+* Sharing access credentials or private information
+* Bypassing security measures or access controls
 
-* **Harassment, discrimination, or exclusion** of any kind, including (but not limited to) comments or actions based on:
-    * Age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.
-* **Sexualized language or imagery**, unwanted sexual attention, or advances of any kind.
-* **Trolling, insulting, or derogatory comments**, personal or political attacks, or any form of bullying.
-* **Public or private harassment**, including stalking, intimidation, or unwanted attention.
-* **Sharing private information** of others without their explicit consent.
-* **Disrupting the community** through spamming, intentional misinformation, or harmful behavior.
-* **Any conduct that could reasonably be considered unprofessional or inappropriate** in a collaborative setting. 
+**Communication:**
+* Harassment or discrimination of any kind
+* Sexualized language or imagery
+* Trolling, insulting comments, or personal attacks
+* Publicly or privately sharing others' private information
+* Sustained disruption of discussions or events
+* Unwanted sexual attention or advances
 
-## Enforcement Responsibilities
+**Professional Conduct:**
+* Intimidation or threats
+* Stalking or following
+* Publishing others' private information
+* Any conduct that could reasonably be considered inappropriate
 
-Community leaders are responsible for clarifying and enforcing our standards of
-acceptable behavior and will take appropriate and fair corrective action in
-response to any behavior that they deem inappropriate, threatening, offensive,
-or harmful.
+## Reporting Guidelines
 
-Community leaders have the right and responsibility to remove, edit, or reject
-comments, commits, code, wiki edits, issues, and other contributions that are
-not aligned to this Code of Conduct, and will communicate reasons for moderation
-decisions when appropriate.
+If you experience or witness unacceptable behavior, you can report it by:
+
+1. **Email**: Send a detailed report to cyb3rhack3r@outlook.com
+2. **Private Message**: Contact a community leader directly
+3. **Issue Report**: For public documentation issues, use the repository's issue tracker
+
+When reporting, please include:
+* Your contact information
+* Names of any individuals involved
+* Description of the behavior
+* Date, time, and context of the incident
+* Any relevant evidence (screenshots, links, etc.)
+
+## Enforcement Process
+
+1. **Report Reception**
+   * All reports are reviewed confidentially
+   * Initial response within 24 hours
+   * Full review completed within 7 days
+
+2. **Investigation**
+   * Gather information from all parties
+   * Review evidence and context
+   * Determine appropriate response
+
+3. **Action**
+   * Implement decided consequences
+   * Document the incident
+   * Follow up with reporter
 
 ## Scope
 
-This Code of Conduct applies to all community spaces, including but not limited to:
+This Code of Conduct applies to:
 
-* **Code repositories (e.g., GitHub)**: This includes pull requests, issues, discussions, code reviews, and any other interactions within the project's codebase.
-* **Communication channels:**  Such as mailing lists, forums, chat platforms (e.g., Slack, Discord), online meetings, and social media groups associated with the project. 
-* **Project-related events:** Both online and in-person events such as conferences, meetups, workshops, or hackathons.
+**Project Spaces:**
+* Code repositories and pull requests
+* Issue discussions and wiki pages
+* Documentation and comments
+* Project websites and APIs
 
-Furthermore, this Code of Conduct applies when individuals represent the community in any official capacity. Examples include:
+**Communication Channels:**
+* Official chat platforms (Discord, Slack)
+* Mailing lists and forums
+* Social media presence
+* Video calls and meetings
 
-* **Using official project branding:**  Such as email addresses, social media accounts, or websites affiliated with the project.
-* **Acting as a designated representative:**  At conferences, workshops, or in interactions with external parties. 
-* **Contributing to official project documentation or resources.**
+**Events:**
+* Conferences and meetups
+* Workshops and presentations
+* Online streaming events
+* Project-sponsored activities
 
-**We expect anyone who interacts with our community to adhere to this Code of Conduct, regardless of their role or level of involvement.** 
+## Conflict Resolution
 
-## Enforcement
+When conflicts arise:
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at
-cyb3rhack3r@outlook.com.
-All complaints will be reviewed and investigated promptly and fairly.
+1. **Direct Resolution**
+   * Address issues directly when possible
+   * Focus on behavior, not personalities
+   * Use "I" statements to express concerns
 
-All community leaders are obligated to respect the privacy and security of the
-reporter of any incident.
+2. **Mediation**
+   * Request community leader assistance
+   * Both parties agree to mediation terms
+   * Focus on finding mutual solutions
+
+3. **Formal Resolution**
+   * Submit formal complaint if needed
+   * Follow enforcement process
+   * Accept and implement decisions
+
+## Confidentiality
+
+We maintain strict confidentiality regarding:
+* Reporter identities
+* Incident details
+* Investigation proceedings
+* Private communications
+* Personal information
 
 ## Enforcement Guidelines
 
-Community leaders will follow these Community Impact Guidelines in determining
-the consequences for any action they deem in violation of this Code of Conduct:
-
 ### 1. Correction
+**Examples:**
+* Using inappropriate technical terminology
+* Making dismissive comments about skill levels
+* Minor documentation infractions
 
-**Community Impact**: Use of inappropriate language or other behavior deemed
-unprofessional or unwelcome in the community.
-
-**Consequence**: A private, written warning from community leaders, providing
-clarity around the nature of the violation and an explanation of why the
-behavior was inappropriate. A public apology may be requested.
+**Response:**
+* Private warning
+* Request for public apology if appropriate
+* Removal of inappropriate content
 
 ### 2. Warning
+**Examples:**
+* Pattern of inappropriate behavior
+* Single serious violation
+* Repeated minor violations
 
-**Community Impact**: A violation through a single incident or series
-of actions.
-
-**Consequence**: A warning with consequences for continued behavior. No
-interaction with the people involved, including unsolicited interaction with
-those enforcing the Code of Conduct, for a specified period of time. This
-includes avoiding interactions in community spaces as well as external channels
-like social media. Violating these terms may lead to a temporary or
-permanent ban.
+**Response:**
+* Formal warning
+* Temporary restriction from specific spaces
+* Required acknowledgment before returning
 
 ### 3. Temporary Ban
+**Examples:**
+* Harassment of any form
+* Sustained disruption
+* Repeated violations after warnings
 
-**Community Impact**: A serious violation of community standards, including
-sustained inappropriate behavior.
-
-**Consequence**: A temporary ban from any sort of interaction or public
-communication with the community for a specified period of time. No public or
-private interaction with the people involved, including unsolicited interaction
-with those enforcing the Code of Conduct, is allowed during this period.
-Violating these terms may lead to a permanent ban.
+**Response:**
+* 1-6 month ban from all community spaces
+* No public or private contact
+* Clear conditions for return
 
 ### 4. Permanent Ban
+**Examples:**
+* Violence or threats
+* Hate speech or discrimination
+* Pattern of severe violations
 
-**Community Impact**: Demonstrating a pattern of violation of community
-standards, including sustained inappropriate behavior,  harassment of an
-individual, or aggression toward or disparagement of classes of individuals.
-
-**Consequence**: A permanent ban from any sort of public interaction within
-the community.
+**Response:**
+* Permanent removal from all spaces
+* Public documentation of ban
+* No possibility of return
 
 ## Attribution
 
-This Code of Conduct is based on the [Contributor Covenant][homepage], version 2.0. While we drew inspiration from this widely respected template, we have made modifications to tailor it to the specific needs and values of our community. 
-
-[homepage]: https://www.contributor-covenant.org/version/2/0/code_of_conduct.html
-
-You can find the original Contributor Covenant, along with answers to frequently asked questions and translations, at the link above. 
+This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/version/2/0/code_of_conduct.html), version 2.0. While inspired by this template, we've enhanced it to address the specific needs of the Synthalingua community, particularly around technical collaboration and community building.
 
 For answers to common questions about this code of conduct, see the FAQ at
 https://www.contributor-covenant.org/faq. Translations are available at

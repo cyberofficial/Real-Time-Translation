@@ -311,27 +311,39 @@ Public Class subtitlewindow
         BackGroundToggle = False
     End Sub
 
+    Private Sub SetTextVisibility(textType As String, visible As Boolean)
+        Select Case textType
+            Case "Original"
+                iOriginalText = visible
+            Case "Translate"
+                iTranslateText = visible
+            Case "Transcribe"
+                iTranscribeText = visible
+        End Select
+    End Sub
+
     Private Sub ShowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowToolStripMenuItem.Click
-        iOriginalText = True
+        SetTextVisibility("Original", True)
     End Sub
 
     Private Sub HideToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HideToolStripMenuItem.Click
-        iOriginalText = False
+        SetTextVisibility("Original", False)
     End Sub
 
     Private Sub ShowToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ShowToolStripMenuItem1.Click
-        iTranslateText = True
+        SetTextVisibility("Translate", True)
     End Sub
 
     Private Sub HideToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles HideToolStripMenuItem1.Click
-        iTranslateText = False
+        SetTextVisibility("Translate", False)
     End Sub
 
     Private Sub ShowToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ShowToolStripMenuItem2.Click
-        iTranscribeText = True
+        SetTextVisibility("Transcribe", True)
     End Sub
+
     Private Sub HideToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles HideToolStripMenuItem2.Click
-        iTranscribeText = False
+        SetTextVisibility("Transcribe", False)
     End Sub
 
     Private Sub headertextlbl_MouseDown(sender As Object, e As MouseEventArgs) Handles headertextlbl.MouseDown
@@ -405,19 +417,56 @@ Public Class subtitlewindow
         End With
     End Sub
 
+    Private Function GetCornerType(x As Integer, y As Integer, width As Integer, height As Integer) As String
+        Const CORNER_THRESHOLD As Integer = 10
+        If x >= width - CORNER_THRESHOLD And y >= height - CORNER_THRESHOLD Then
+            Return "bottom-right"
+        ElseIf x <= CORNER_THRESHOLD And y >= height - CORNER_THRESHOLD Then
+            Return "bottom-left"
+        ElseIf x >= width - CORNER_THRESHOLD And y <= CORNER_THRESHOLD Then
+            Return "top-right"
+        ElseIf x <= CORNER_THRESHOLD And y <= CORNER_THRESHOLD Then
+            Return "top-left"
+        End If
+        Return String.Empty
+    End Function
+
+    Private Function GetCornerCursor(cornerType As String) As Cursor
+        Select Case cornerType
+            Case "bottom-right", "top-left"
+                Return Cursors.SizeNWSE
+            Case "bottom-left", "top-right"
+                Return Cursors.SizeNESW
+            Case Else
+                Return Cursors.Default
+        End Select
+    End Function
+
+    Private Sub ResizePanel(corner As String, endPoint As Point)
+        Select Case corner
+            Case "bottom-right"
+                Panel1.Size = New Size(startSize.Width + (endPoint.X - startPoint.X),
+                                     startSize.Height + (endPoint.Y - startPoint.Y))
+            Case "bottom-left"
+                Panel1.Location = New Point(startLocation.X + (endPoint.X - startPoint.X), startLocation.Y)
+                Panel1.Size = New Size(startSize.Width - (endPoint.X - startPoint.X),
+                                     startSize.Height + (endPoint.Y - startPoint.Y))
+            Case "top-right"
+                Panel1.Location = New Point(startLocation.X, startLocation.Y + (endPoint.Y - startPoint.Y))
+                Panel1.Size = New Size(startSize.Width + (endPoint.X - startPoint.X),
+                                     startSize.Height - (endPoint.Y - startPoint.Y))
+            Case "top-left"
+                Panel1.Location = New Point(startLocation.X + (endPoint.X - startPoint.X),
+                                          startLocation.Y + (endPoint.Y - startPoint.Y))
+                Panel1.Size = New Size(startSize.Width - (endPoint.X - startPoint.X),
+                                     startSize.Height - (endPoint.Y - startPoint.Y))
+        End Select
+    End Sub
+
     Private Sub Panel1_MouseDown(sender As Object, e As MouseEventArgs) Handles Panel1.MouseDown
         If e.Button = MouseButtons.Left Then
-            If e.X >= Panel1.Width - 10 And e.Y >= Panel1.Height - 10 Then
-                resizableCorner = "bottom-right"
-            ElseIf e.X <= 10 And e.Y >= Panel1.Height - 10 Then
-                resizableCorner = "bottom-left"
-            ElseIf e.X >= Panel1.Width - 10 And e.Y <= 10 Then
-                resizableCorner = "top-right"
-            ElseIf e.X <= 10 And e.Y <= 10 Then
-                resizableCorner = "top-left"
-            End If
-
-            If resizableCorner <> "" Then
+            resizableCorner = GetCornerType(e.X, e.Y, Panel1.Width, Panel1.Height)
+            If resizableCorner <> String.Empty Then
                 resizing = True
                 startPoint = e.Location
                 startSize = Panel1.Size
@@ -431,38 +480,17 @@ Public Class subtitlewindow
             Me.Opacity = 0.7
             Panel1.Cursor = Cursors.Cross
         Else
-            If e.X >= Panel1.Width - 10 And e.Y >= Panel1.Height - 10 Then
-                Panel1.Cursor = Cursors.SizeNWSE
-            ElseIf e.X <= 10 And e.Y >= Panel1.Height - 10 Then
-                Panel1.Cursor = Cursors.SizeNESW
-            ElseIf e.X >= Panel1.Width - 10 And e.Y <= 10 Then
-                Panel1.Cursor = Cursors.SizeNESW
-            ElseIf e.X <= 10 And e.Y <= 10 Then
-                Panel1.Cursor = Cursors.SizeNWSE
-            Else
-                Panel1.Cursor = Cursors.Default
-            End If
+            Dim corner = GetCornerType(e.X, e.Y, Panel1.Width, Panel1.Height)
+            Panel1.Cursor = GetCornerCursor(corner)
         End If
     End Sub
 
     Private Sub Panel1_MouseUp(sender As Object, e As MouseEventArgs) Handles Panel1.MouseUp
         If resizing Then
             endPoint = Panel1.PointToClient(MousePosition)
-            Select Case resizableCorner
-                Case "bottom-right"
-                    Panel1.Size = New Size(startSize.Width + (endPoint.X - startPoint.X), startSize.Height + (endPoint.Y - startPoint.Y))
-                Case "bottom-left"
-                    Panel1.Location = New Point(startLocation.X + (endPoint.X - startPoint.X), startLocation.Y)
-                    Panel1.Size = New Size(startSize.Width - (endPoint.X - startPoint.X), startSize.Height + (endPoint.Y - startPoint.Y))
-                Case "top-right"
-                    Panel1.Location = New Point(startLocation.X, startLocation.Y + (endPoint.Y - startPoint.Y))
-                    Panel1.Size = New Size(startSize.Width + (endPoint.X - startPoint.X), startSize.Height - (endPoint.Y - startPoint.Y))
-                Case "top-left"
-                    Panel1.Location = New Point(startLocation.X + (endPoint.X - startPoint.X), startLocation.Y + (endPoint.Y - startPoint.Y))
-                    Panel1.Size = New Size(startSize.Width - (endPoint.X - startPoint.X), startSize.Height - (endPoint.Y - startPoint.Y))
-            End Select
+            ResizePanel(resizableCorner, endPoint)
             resizing = False
-            resizableCorner = ""
+            resizableCorner = String.Empty
             Me.Opacity = 1
             Panel1.Cursor = Cursors.Default
         End If
@@ -496,40 +524,44 @@ Public Class subtitlewindow
         End If
     End Sub
 
+    Private Sub SetTextAlignment(alignment As ContentAlignment)
+        headertextlbl.TextAlign = alignment
+    End Sub
+
     Private Sub LeftToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LeftToolStripMenuItem.Click
-        headertextlbl.TextAlign = ContentAlignment.TopLeft
+        SetTextAlignment(ContentAlignment.TopLeft)
     End Sub
 
     Private Sub CenterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CenterToolStripMenuItem.Click
-        headertextlbl.TextAlign = ContentAlignment.TopCenter
+        SetTextAlignment(ContentAlignment.TopCenter)
     End Sub
 
     Private Sub RightToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RightToolStripMenuItem.Click
-        headertextlbl.TextAlign = ContentAlignment.TopRight
+        SetTextAlignment(ContentAlignment.TopRight)
     End Sub
 
     Private Sub LeftToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles LeftToolStripMenuItem2.Click
-        headertextlbl.TextAlign = ContentAlignment.MiddleLeft
+        SetTextAlignment(ContentAlignment.MiddleLeft)
     End Sub
 
     Private Sub CenterToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles CenterToolStripMenuItem3.Click
-        headertextlbl.TextAlign = ContentAlignment.MiddleCenter
+        SetTextAlignment(ContentAlignment.MiddleCenter)
     End Sub
 
     Private Sub RightToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles RightToolStripMenuItem2.Click
-        headertextlbl.TextAlign = ContentAlignment.MiddleRight
+        SetTextAlignment(ContentAlignment.MiddleRight)
     End Sub
 
     Private Sub LeftToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles LeftToolStripMenuItem3.Click
-        headertextlbl.TextAlign = ContentAlignment.BottomLeft
+        SetTextAlignment(ContentAlignment.BottomLeft)
     End Sub
 
     Private Sub CenterToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles CenterToolStripMenuItem2.Click
-        headertextlbl.TextAlign = ContentAlignment.BottomCenter
+        SetTextAlignment(ContentAlignment.BottomCenter)
     End Sub
 
     Private Sub RightToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles RightToolStripMenuItem1.Click
-        headertextlbl.TextAlign = ContentAlignment.BottomRight
+        SetTextAlignment(ContentAlignment.BottomRight)
     End Sub
 
     Private Sub TransparentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransparentToolStripMenuItem.Click

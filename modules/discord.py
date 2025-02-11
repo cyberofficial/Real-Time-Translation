@@ -1,6 +1,34 @@
-from modules.imports import *
+"""
+Discord webhook integration module for message forwarding.
+
+This module provides functionality to send messages to Discord channels through
+webhooks. It handles message chunking for long texts and implements rate limit
+handling to ensure reliable message delivery.
+"""
+
+import requests
+import json
 
 def send_to_discord_webhook(webhook_url, text):
+    """
+    Send a message to a Discord channel through a webhook.
+
+    Handles long messages by automatically chunking them into smaller pieces
+    to comply with Discord's message length limits. Also includes basic rate
+    limit detection and error handling.
+
+    Args:
+        webhook_url (str): The Discord webhook URL to send messages to
+        text (str): The message text to send
+
+    Note:
+        - Messages longer than 1800 characters are automatically split into chunks
+        - Prints warning messages for rate limits and failed deliveries
+        - Discord's rate limits are detected via 429 status code responses
+
+    Example:
+        send_to_discord_webhook("https://discord.com/api/webhooks/...", "Hello World!")
+    """
     data = {
         "content": text
     }
