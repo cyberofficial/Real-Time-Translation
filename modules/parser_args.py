@@ -1,4 +1,5 @@
-from modules.imports import *
+import argparse
+from colorama import Fore, Back, Style
 from modules.languages import get_valid_languages
 
 # Define a constant variable for valid language choices
@@ -22,7 +23,7 @@ def set_model_by_ram(ram, language):
             model = "base.en"
         else:
             model = "base"
-    elif ram == "4gb":
+    elif ram == "3gb":
         if language == "en" or language == "English":
             model = "small.en"
         else:
@@ -32,12 +33,16 @@ def set_model_by_ram(ram, language):
             model = "medium.en"
         else:
             model = "medium"
-    elif ram == "12gb-v2" or ram == "12gb-v3":
+    elif ram == "7gb":
+        model = "turbo"
+        if language == "en" or language == "English":
+            print(f"{Fore.YELLOW}Note{Style.RESET_ALL}: The turbo model is multilingual and works for all languages.")
+    elif ram == "11gb-v2" or ram == "11gb-v3":
         # Determine the model based on the version
-        if ram == "12gb-v2":
+        if ram == "11gb-v2":
             model = "large-v2"
             version = "Version 2"
-        else:  # ram == "12gb-v3"
+        else:  # ram == "11gb-v3"
             model = "large-v3"
             version = "Version 3"
         
@@ -48,15 +53,14 @@ def set_model_by_ram(ram, language):
             yellow_text = Fore.YELLOW + Back.BLACK
             reset_text = Style.RESET_ALL
             
-            print(f"{red_text}WARNING{reset_text}: {yellow_text}12gb{reset_text} is overkill for English. "
-                  f"Do you want to swap to the {green_text}6gb{reset_text} model? "
+            print(f"{red_text}WARNING{reset_text}: {yellow_text}11gb{reset_text} is overkill for English. "
+                  f"Do you want to swap to the {green_text}7gb{reset_text} turbo model? "
                   f"If you are transcribing a language other than English, you can ignore this warning and press {green_text}n{reset_text}.")
             
             if input("y/n: ").lower() == "y":
-                model = "medium.en"
+                model = "turbo"
             else:
-                print(f"Using 12GB {version}")
-                ram = "12gb"  # Normalize ram to "12gb" for both v2 and v3
+                print(f"Using 11GB {version}")
 
     else:
         raise ValueError("Invalid RAM setting provided")
@@ -66,9 +70,9 @@ def set_model_by_ram(ram, language):
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ram", default="4gb", help="Model to use", choices=["1gb", "2gb", "4gb", "6gb", "12gb-v2", "12gb-v3"])
+    parser.add_argument("--ram", default="2gb", help="Model to use", choices=["1gb", "2gb", "3gb", "6gb", "7gb", "11gb-v2", "11gb-v3"])
     parser.add_argument("--ramforce", action='store_true', help="Force the model to use the RAM setting provided. Warning: This may cause the model to crash.")
-    parser.add_argument("--fp16", action='store_true', default=False, help="Sets Models to FP16 Mode, Heavy on Usage, but more accurate")
+    parser.add_argument("--fp16", action='store_true', default=False, help="Sets Models to FP16 Mode, increases speed with a light decrease in accuracy.")
     parser.add_argument("--energy_threshold", default=100, help="Energy level for mic to detect.", type=int)
     parser.add_argument("--mic_calibration_time", help="How long to calibrate the mic for in seconds. To skip user input type 0 and time will be set to 5 seconds.", type=int)
     parser.add_argument("--record_timeout", default=1, help="How real time the recording is in seconds.", type=float)
@@ -80,7 +84,6 @@ def parse_arguments():
     parser.add_argument("--transcribe", action='store_true', help="transcribe the text into the desired language.")
     parser.add_argument("--language", help="Language to translate from.", type=str, choices=VALID_LANGUAGES)
     parser.add_argument("--target_language", help="Language to translate to.", type=str, choices=VALID_LANGUAGES)
-    parser.add_argument("--auto_model_swap", action='store_true', help="Automatically swap model based on detected language.")
     parser.add_argument("--device", default="cuda", help="Device to use for model. If not specified, will use CUDA if available. Available options: cpu, cuda")
     parser.add_argument("--cuda_device", default=0, help="CUDA device to use for model. If not specified, will use CUDA device 0.", type=int)
     parser.add_argument("--discord_webhook", default=None, help="Discord webhook to send transcription to.", type=str)

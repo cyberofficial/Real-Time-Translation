@@ -11,11 +11,11 @@ if [ ! -f "transcribe_audio.py" ]; then
 fi
 
 echo "Checking for Python 3.10.x"
-python_version=$(python3.10 -V 2>&1)
+echo "Running command: python -V"
+python_version=$(python -V 2>&1)
 echo "$python_version"
 
 # User verification for Python version
-echo -n "Before you continue, make sure you also have python3.10-venv installed. (apt install python3.10-venv on debian systems)"
 echo -n "Does this show Python 3.10.x? (Y/N): "
 read user_check
 
@@ -23,7 +23,7 @@ if [[ ! "$user_check" =~ ^[Yy]$ ]]; then
     echo "It seems you do not have Python 3.10.x installed."
     echo "Please download and install Python 3.10.10 from the following link:"
     echo "https://www.python.org/downloads/release/python-31010/"
-    echo -n "If you have Python 3.10.x installed but it's not in your PATH, enter the full path to the python binary (e.g., /path/to/python3.10): "
+    echo -n "If you have Python 3.10.x installed but it's not in your PATH, enter the full path to the python binary (e.g., /path/to/python): "
     read python_path
     if [ -z "$python_path" ]; then
         echo "Python 3.10.x is required. Exiting..."
@@ -31,13 +31,14 @@ if [[ ! "$user_check" =~ ^[Yy]$ ]]; then
     fi
     python="$python_path"
 else
-    python="python3.10"
+    python="python"
 fi
 
 # Pause for user acknowledgment
 read -p "Press Enter to continue..."
 
 # Prepare environment
+clear
 if [ -d "data_whisper" ]; then
     echo -n "Python environment 'data_whisper' already exists. Reinstall it? [y/n]: "
     read reinstall
@@ -78,18 +79,30 @@ pip install -r requirements.txt
 echo "Applying CUDA patch to install GPU versions of PyTorch packages..."
 pip uninstall --yes torch torchvision torchaudio
 pip cache purge
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
-echo "Setup Completed!"
+echo "Whisper translation environment setup completed!"
 
 # Creating a shortcut script
-echo "Creating example shortcut in $(pwd)"
-echo "You can edit with any text editor anytime."
-echo ""
-echo '#!/bin/bash' > livetranslation.sh
-echo "source \"$(pwd)/data_whisper/bin/activate\"" >> livetranslation.sh
-echo "python \"$(pwd)/transcribe_audio.py\" --ram 4gb --non_english --translate" >> livetranslation.sh
-echo "read -p \"Press enter to exit...\"" >> livetranslation.sh
+echo "Creating a shortcut script for the translation app..."
+cat > livetranslation.sh << 'EOL'
+#!/bin/bash
+source "$(dirname "$0")/data_whisper/bin/activate"
+# Include ffmpeg path if available
+if [ -f "ffmpeg_path.sh" ]; then
+    source ffmpeg_path.sh
+fi
+python "$(dirname "$0")/transcribe_audio.py" --ram 4gb --non_english --translate
+read -p "Press enter to exit..."
+EOL
+
 chmod +x livetranslation.sh
 
-echo "Done!"
+echo "Shortcut 'livetranslation.sh' created in the current directory."
+echo "You can edit this file with any text editor if necessary."
+read -p "Press Enter to continue..."
+
+echo "Setting up Environment Stuff..."
+$python set_up_env.py
+
+echo "Setup completed successfully!"

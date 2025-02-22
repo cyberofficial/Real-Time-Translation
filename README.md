@@ -159,7 +159,7 @@ This script uses argparse to accept command line arguments. The following option
 | `--transcribe` | Transcribe the audio to a set target language. Target Language flag is required. |
 | `--target_language` | Select the language to translate to. Available choices are a list of languages in ISO 639-1 format, as well as their English names. |
 | `--language` | Select the language to translate from. Available choices are a list of languages in ISO 639-1 format, as well as their English names. |
-| `--auto_model_swap` | Automatically swap the model based on the detected language. Enables automatic model swapping. |
+| ~~`--auto_model_swap`~~ | ~~Automatically swap the model based on the detected language. Enables automatic model swapping.~~ Removed, deprecated. |
 | `--device` | Select the device to use for the model. Default is "cuda" if available. Available options are "cpu" and "cuda". When setting to CPU you can choose any RAM size as long as you have enough RAM. The CPU option is optimized for multi-threading, so if you have like 16 cores, 32 threads, you can see good results. |
 | `--cuda_device` | Select the CUDA device to use for the model. Default is 0. |
 | `--discord_webhook` | Set the Discord webhook to send the transcription to. |

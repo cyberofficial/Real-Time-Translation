@@ -116,6 +116,7 @@ Partial Class MainUI
         GitHubPicture = New PictureBox()
         SaveConfig = New Button()
         WipeSettings = New Button()
+        KoFiPicture = New PictureBox()
         CheckBoxCMDBLock = New CheckBox()
         FolderBrowserDialog1 = New FolderBrowserDialog()
         CaptionsInputFile = New OpenFileDialog()
@@ -145,6 +146,7 @@ Partial Class MainUI
         GroupBox5.SuspendLayout()
         CType(PictureItch, ComponentModel.ISupportInitialize).BeginInit()
         CType(GitHubPicture, ComponentModel.ISupportInitialize).BeginInit()
+        CType(KoFiPicture, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox6.SuspendLayout()
         SuspendLayout()
         ' 
@@ -207,10 +209,10 @@ Partial Class MainUI
         SaveConfigToFileButton.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         SaveConfigToFileButton.FlatStyle = FlatStyle.Popup
         SaveConfigToFileButton.Font = New Font("Segoe UI", 12F)
-        SaveConfigToFileButton.Location = New Point(513, 736)
+        SaveConfigToFileButton.Location = New Point(631, 578)
         SaveConfigToFileButton.Margin = New Padding(3, 2, 3, 2)
         SaveConfigToFileButton.Name = "SaveConfigToFileButton"
-        SaveConfigToFileButton.Size = New Size(108, 32)
+        SaveConfigToFileButton.Size = New Size(113, 32)
         SaveConfigToFileButton.TabIndex = 1
         SaveConfigToFileButton.Text = "Save to File"
         SaveConfigToFileButton.UseVisualStyleBackColor = True
@@ -263,7 +265,7 @@ Partial Class MainUI
         RamSize.AutoCompleteSource = AutoCompleteSource.ListItems
         RamSize.DropDownStyle = ComboBoxStyle.DropDownList
         RamSize.FormattingEnabled = True
-        RamSize.Items.AddRange(New Object() {"1gb", "2gb", "4gb", "6gb", "12gb-v2", "12gb-v3"})
+        RamSize.Items.AddRange(New Object() {"1gb", "2gb", "3gb", "6gb", "7gb", "11gb-v2", "11gb-v3"})
         RamSize.Location = New Point(71, 5)
         RamSize.Margin = New Padding(3, 2, 3, 2)
         RamSize.Name = "RamSize"
@@ -522,14 +524,14 @@ Partial Class MainUI
         ConfigTextBox.BackColor = Color.SlateBlue
         ConfigTextBox.BorderStyle = BorderStyle.FixedSingle
         ConfigTextBox.Font = New Font("Segoe UI", 13F)
-        ConfigTextBox.Location = New Point(153, 472)
+        ConfigTextBox.Location = New Point(157, 196)
         ConfigTextBox.Margin = New Padding(3, 2, 3, 2)
         ConfigTextBox.Multiline = True
         ConfigTextBox.Name = "ConfigTextBox"
         ConfigTextBox.ReadOnly = True
         ConfigTextBox.RightToLeft = RightToLeft.No
         ConfigTextBox.ScrollBars = ScrollBars.Vertical
-        ConfigTextBox.Size = New Size(468, 237)
+        ConfigTextBox.Size = New Size(463, 414)
         ConfigTextBox.TabIndex = 10
         ConfigTextBox.Visible = False
         ' 
@@ -539,10 +541,10 @@ Partial Class MainUI
         GenerateConfigButton.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         GenerateConfigButton.FlatStyle = FlatStyle.Popup
         GenerateConfigButton.Font = New Font("Segoe UI", 13F)
-        GenerateConfigButton.Location = New Point(153, 736)
+        GenerateConfigButton.Location = New Point(631, 371)
         GenerateConfigButton.Margin = New Padding(3, 2, 3, 2)
         GenerateConfigButton.Name = "GenerateConfigButton"
-        GenerateConfigButton.Size = New Size(116, 32)
+        GenerateConfigButton.Size = New Size(467, 32)
         GenerateConfigButton.TabIndex = 11
         GenerateConfigButton.Text = "Generate Config"
         GenerateConfigButton.UseVisualStyleBackColor = True
@@ -610,11 +612,11 @@ Partial Class MainUI
         SettingsTabs.Controls.Add(TabPage3)
         SettingsTabs.Controls.Add(TabPage4)
         SettingsTabs.HotTrack = True
-        SettingsTabs.Location = New Point(153, 176)
+        SettingsTabs.Location = New Point(627, 6)
         SettingsTabs.Margin = New Padding(3, 2, 3, 2)
         SettingsTabs.Name = "SettingsTabs"
         SettingsTabs.SelectedIndex = 0
-        SettingsTabs.Size = New Size(467, 296)
+        SettingsTabs.Size = New Size(467, 343)
         SettingsTabs.TabIndex = 19
         ' 
         ' TabPage1
@@ -625,7 +627,7 @@ Partial Class MainUI
         TabPage1.Margin = New Padding(3, 2, 3, 2)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3, 2, 3, 2)
-        TabPage1.Size = New Size(459, 265)
+        TabPage1.Size = New Size(459, 312)
         TabPage1.TabIndex = 0
         TabPage1.Text = "HLS Settings"
         ' 
@@ -651,7 +653,7 @@ Partial Class MainUI
         TabPage2.Margin = New Padding(3, 2, 3, 2)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3, 2, 3, 2)
-        TabPage2.Size = New Size(459, 265)
+        TabPage2.Size = New Size(459, 312)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Microphone Settings"
         ' 
@@ -826,7 +828,7 @@ Partial Class MainUI
         TabPage3.Location = New Point(4, 27)
         TabPage3.Name = "TabPage3"
         TabPage3.Padding = New Padding(3)
-        TabPage3.Size = New Size(459, 265)
+        TabPage3.Size = New Size(459, 312)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Generate Captions"
         ' 
@@ -917,7 +919,7 @@ Partial Class MainUI
         TabPage4.Location = New Point(4, 27)
         TabPage4.Name = "TabPage4"
         TabPage4.Padding = New Padding(3)
-        TabPage4.Size = New Size(459, 265)
+        TabPage4.Size = New Size(459, 312)
         TabPage4.TabIndex = 3
         TabPage4.Text = "Model Settings"
         ' 
@@ -927,7 +929,7 @@ Partial Class MainUI
         Label17.Font = New Font("Segoe UI", 12F)
         Label17.Location = New Point(6, 88)
         Label17.Name = "Label17"
-        Label17.Size = New Size(443, 147)
+        Label17.Size = New Size(443, 189)
         Label17.TabIndex = 9
         Label17.Text = resources.GetString("Label17.Text")
         ' 
@@ -936,9 +938,9 @@ Partial Class MainUI
         PrecisionCheckBox.AutoSize = True
         PrecisionCheckBox.Location = New Point(241, 7)
         PrecisionCheckBox.Name = "PrecisionCheckBox"
-        PrecisionCheckBox.Size = New Size(108, 19)
+        PrecisionCheckBox.Size = New Size(82, 19)
         PrecisionCheckBox.TabIndex = 8
-        PrecisionCheckBox.Text = "Precision Mode"
+        PrecisionCheckBox.Text = "Half Mode"
         PrecisionCheckBox.UseVisualStyleBackColor = True
         ' 
         ' Label16
@@ -989,10 +991,10 @@ Partial Class MainUI
         RunScript.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         RunScript.FlatStyle = FlatStyle.Popup
         RunScript.Font = New Font("Segoe UI", 15F)
-        RunScript.Location = New Point(274, 736)
+        RunScript.Location = New Point(631, 443)
         RunScript.Margin = New Padding(3, 2, 3, 2)
         RunScript.Name = "RunScript"
-        RunScript.Size = New Size(234, 32)
+        RunScript.Size = New Size(467, 44)
         RunScript.TabIndex = 20
         RunScript.Text = "Run"
         RunScript.UseVisualStyleBackColor = True
@@ -1140,7 +1142,7 @@ Partial Class MainUI
         ' PictureItch
         ' 
         PictureItch.Image = My.Resources.Resources.itch_io_icon_256x256_0aig5hor
-        PictureItch.Location = New Point(64, 562)
+        PictureItch.Location = New Point(1046, 587)
         PictureItch.Name = "PictureItch"
         PictureItch.Size = New Size(48, 48)
         PictureItch.SizeMode = PictureBoxSizeMode.Zoom
@@ -1151,7 +1153,7 @@ Partial Class MainUI
         ' GitHubPicture
         ' 
         GitHubPicture.Image = My.Resources.Resources._25231
-        GitHubPicture.Location = New Point(10, 562)
+        GitHubPicture.Location = New Point(992, 587)
         GitHubPicture.Name = "GitHubPicture"
         GitHubPicture.Size = New Size(48, 48)
         GitHubPicture.SizeMode = PictureBoxSizeMode.Zoom
@@ -1165,12 +1167,12 @@ Partial Class MainUI
         SaveConfig.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         SaveConfig.FlatStyle = FlatStyle.Popup
         SaveConfig.Font = New Font("Segoe UI", 12F)
-        SaveConfig.Location = New Point(7, 679)
+        SaveConfig.Location = New Point(631, 407)
         SaveConfig.Margin = New Padding(3, 2, 3, 2)
         SaveConfig.Name = "SaveConfig"
-        SaveConfig.Size = New Size(140, 59)
+        SaveConfig.Size = New Size(467, 32)
         SaveConfig.TabIndex = 1
-        SaveConfig.Text = "Save Current Configuration"
+        SaveConfig.Text = "Quick Save"
         ToolTip1.SetToolTip(SaveConfig, "Save's the current state of the gui." & vbCrLf)
         SaveConfig.UseVisualStyleBackColor = True
         ' 
@@ -1179,7 +1181,7 @@ Partial Class MainUI
         WipeSettings.FlatAppearance.MouseDownBackColor = Color.Indigo
         WipeSettings.FlatAppearance.MouseOverBackColor = Color.SlateBlue
         WipeSettings.FlatStyle = FlatStyle.Popup
-        WipeSettings.Location = New Point(24, 742)
+        WipeSettings.Location = New Point(24, 616)
         WipeSettings.Name = "WipeSettings"
         WipeSettings.Size = New Size(123, 23)
         WipeSettings.TabIndex = 29
@@ -1187,11 +1189,22 @@ Partial Class MainUI
         ToolTip1.SetToolTip(WipeSettings, "[DANGER] Wipes the Settings,")
         WipeSettings.UseVisualStyleBackColor = True
         ' 
+        ' KoFiPicture
+        ' 
+        KoFiPicture.Image = CType(resources.GetObject("KoFiPicture.Image"), Image)
+        KoFiPicture.Location = New Point(938, 587)
+        KoFiPicture.Name = "KoFiPicture"
+        KoFiPicture.Size = New Size(48, 48)
+        KoFiPicture.SizeMode = PictureBoxSizeMode.Zoom
+        KoFiPicture.TabIndex = 35
+        KoFiPicture.TabStop = False
+        ToolTip1.SetToolTip(KoFiPicture, "Open K-Fi Support Page")
+        ' 
         ' CheckBoxCMDBLock
         ' 
         CheckBoxCMDBLock.AutoSize = True
         CheckBoxCMDBLock.CheckAlign = ContentAlignment.MiddleRight
-        CheckBoxCMDBLock.Location = New Point(153, 713)
+        CheckBoxCMDBLock.Location = New Point(162, 616)
         CheckBoxCMDBLock.Margin = New Padding(3, 2, 3, 2)
         CheckBoxCMDBLock.Name = "CheckBoxCMDBLock"
         CheckBoxCMDBLock.RightToLeft = RightToLeft.No
@@ -1207,7 +1220,7 @@ Partial Class MainUI
         ' EraseCheckBox
         ' 
         EraseCheckBox.AutoSize = True
-        EraseCheckBox.Location = New Point(7, 747)
+        EraseCheckBox.Location = New Point(10, 621)
         EraseCheckBox.Name = "EraseCheckBox"
         EraseCheckBox.Size = New Size(15, 14)
         EraseCheckBox.TabIndex = 30
@@ -1282,7 +1295,8 @@ Partial Class MainUI
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.DarkSlateBlue
-        ClientSize = New Size(626, 778)
+        ClientSize = New Size(1102, 647)
+        Controls.Add(KoFiPicture)
         Controls.Add(GitHubPicture)
         Controls.Add(PictureItch)
         Controls.Add(GroupBox6)
@@ -1349,6 +1363,7 @@ Partial Class MainUI
         GroupBox5.PerformLayout()
         CType(PictureItch, ComponentModel.ISupportInitialize).EndInit()
         CType(GitHubPicture, ComponentModel.ISupportInitialize).EndInit()
+        CType(KoFiPicture, ComponentModel.ISupportInitialize).EndInit()
         GroupBox6.ResumeLayout(False)
         GroupBox6.PerformLayout()
         ResumeLayout(False)
@@ -1457,5 +1472,6 @@ Partial Class MainUI
     Friend WithEvents FolderBrowserDialog2 As FolderBrowserDialog
     Friend WithEvents PrecisionCheckBox As CheckBox
     Friend WithEvents Label17 As Label
+    Friend WithEvents KoFiPicture As PictureBox
 
 End Class

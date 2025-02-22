@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>X:\github\Real-Time-Translation\Synthalingua_Wrapper\My Project\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>E:\Synthalingua\Synthalingua_Wrapper\My Project\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="BasicMode.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Loading_Screen.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -11,6 +14,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="subtitlewindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UserMode.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="WebBrowserConfig.vb">

@@ -1,12 +1,56 @@
-from modules.imports import *
+"""
+Version Checker Module
 
-version = "1.0.99999"
+This module provides functionality to check and compare version numbers between
+local and remote instances of the application. It supports semantic versioning
+with major.minor.patch format.
+
+Features:
+- Remote version checking from GitHub repository
+- Semantic version comparison (major, minor, patch)
+- Colored output for better readability
+- Detailed error handling for various HTTP status codes
+- User-friendly update notifications
+
+The module uses GitHub's raw content URLs to fetch the remote version and
+provides appropriate feedback for various network conditions and version
+mismatches.
+"""
+
+import requests
+import re
+from typing import Optional
+from colorama import Fore, Style
+
+version = "1.1.0"
 ScriptCreator = "cyberofficial"
 GitHubRepo = "https://github.com/cyberofficial/Synthalingua"
 repo_owner = "cyberofficial"
 repo_name = "Synthalingua"
 
-def get_remote_version(repo_owner, repo_name, updatebranch, file_path):
+def get_remote_version(repo_owner: str, repo_name: str, updatebranch: str, file_path: str) -> Optional[str]:
+    """
+    Fetch and extract version number from a file in a GitHub repository.
+
+    Args:
+        repo_owner (str): GitHub repository owner username
+        repo_name (str): Name of the GitHub repository
+        updatebranch (str): Branch name to check for updates
+        file_path (str): Path to the file containing version information
+
+    Returns:
+        Optional[str]: Version string if found and successfully retrieved,
+                      None if any error occurs (network, parsing, etc.)
+
+    The function handles various HTTP error cases with appropriate user feedback:
+    - 200: Success, attempts to parse version
+    - 404: File not found
+    - 500: Internal server error
+    - 502: Bad gateway
+    - 503: Service unavailable
+    - 504: Gateway timeout
+    Other status codes result in a generic error message
+    """
     url = f"https://raw.githubusercontent.com/{repo_owner}/{repo_name}/{updatebranch}/{file_path}"
     response = requests.get(url)
 
@@ -51,7 +95,29 @@ def get_remote_version(repo_owner, repo_name, updatebranch, file_path):
         return None
         
 
-def check_for_updates(updatebranch):
+def check_for_updates(updatebranch: str) -> None:
+    """
+    Check and compare local version against remote version from GitHub.
+
+    Args:
+        updatebranch (str): Branch name to check for updates (e.g., 'main', 'master')
+
+    This function performs semantic version comparison following major.minor.patch format:
+    1. First compares major version numbers
+    2. If major versions match, compares minor version numbers
+    3. If minor versions match, compares patch version numbers
+
+    Output includes:
+    - Version mismatch notifications (major, minor, or patch level)
+    - Update recommendations with GitHub repository link
+    - Confirmation when using latest version
+    - Notification if local version is newer than remote
+
+    The function uses colored output for better readability:
+    - Yellow: Version numbers
+    - Red: Error messages
+    Standard output for status messages
+    """
     local_version = version
     remote_version = get_remote_version(repo_owner, repo_name, updatebranch, "modules/version_checker.py")
 
